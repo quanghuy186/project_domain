@@ -7,32 +7,35 @@
     <div class="col-md">
         <div class="card mb-4">
             <div class="card-header">
-                <h3 class="card-title">Manager redirect </h3>
+                <h3 class="card-title">Manager Paypal </h3>
             </div> <!-- /.card-header -->
             <div class="card-body">
-                <a href="<?php echo DOMAIN.'?c=redirect&a=add' ?>" class="btn btn-success">Add Store Redirect</a>
+                <a href="<?php echo DOMAIN."?c=paypal&a=add" ?>" class="btn btn-success my-3">Add Paypal</a>
                 <a href="index.php?c=home" class="btn btn-primary my-3">Back Home</a>
 
                 <table class="table table-bordered">
                     <thead>
                         <tr>
                             <th style="width: 10px">STT</th>
-                            <th>Domain Name</th>
+                            <th>Paypal email</th>
                             <th>Active</th>
+                            <th>Is died</th>
                             <th class="text-center">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php if (!empty($redirects)): ?>
+                        <?php if (!empty($paypals)): ?>
                         <?php $stt = 1; ?>
-                        <?php foreach ($redirects as $item): ?>
+                        <?php foreach ($paypals as $item): ?>
                         <tr class="align-middle">
                             <td><?php echo $stt++; ?>.</td>
-                            <td><?php echo htmlspecialchars($item['domain_name']); ?></td>
+                            <td><?php echo htmlspecialchars($item['paypal_email']); ?></td>
                             <td><?php echo $item['is_active'] ? 'Active' : 'Inactive'; ?></td>
+                            <td><?php echo $item['is_died'] ? 'Active' : 'Inactive'; ?></td>
                             <td class="text-center">
+                                <!-- edit -->
 
-                                <a href="index.php?c=redirect&a=edit&id=<?php echo $item['id']; ?>"
+                                <a href="index.php?c=paypal&a=edit&id=<?php echo $item['id']; ?>"
                                     class="btn btn-primary">
                                     <i class="bi bi-pencil-square"></i>
                                 </a>
@@ -61,8 +64,7 @@
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
                                                     data-bs-dismiss="modal">Hủy</button>
-
-                                                <a href="index.php?c=redirect&a=delete&id=<?php echo $item['id']; ?>"
+                                                <a href="index.php?c=paypal&a=delete&id=<?php echo $item['id']; ?>"
                                                     class="btn btn-danger">
                                                     Xóa
                                                 </a>

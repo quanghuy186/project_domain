@@ -7,16 +7,16 @@
     <div class="col-md">
         <div class="card mb-4">
             <div class="card-header">
-                <h3 class="card-title">Manager redirect </h3>
+                <h3 class="card-title">Manager Paypal </h3>
             </div> <!-- /.card-header -->
             <div class="card-body">
                 <div class="container mt-5">
-                    <h2>Add Domain Information</h2>
-                    <form action="index.php?c=redirect&a=store" method="post">
+                    <h2>Edit paypal Information</h2>
+                    <form action="index.php?c=paypal&a=store" method="post">
                         <div class="mb-3">
-                            <label for="domain_name" class="form-label">Domain Name</label>
-                            <input type="text" class="form-control" id="domain_name" name="domain_name"
-                                value="<?php echo $domain['domain_name']; ?>" required>
+                            <label for="paypal_email" class="form-label">Paypal email</label>
+                            <input type="text" class="form-control" id="paypal_email" name="paypal_email"
+                                value="<?php echo $domain['paypal_email']; ?>" required>
                         </div>
                         <div class="form-check mb-3">
                             <input type="checkbox" id="is_active" name="is_active" class="form-check-input" value="1"
@@ -24,9 +24,15 @@
                             <label for="is_active" class="form-check-label">Is Active</label>
                         </div>
 
+                        <div class="form-check mb-3">
+                            <input type="checkbox" id="is_died" name="is_active" class="form-check-input" value="1"
+                                <?php echo $domain['is_died'] ? 'checked' : ''; ?>>
+                            <label for="is_died" class="form-check-label">Is Died</label>
+                        </div>
+
                         <div class="d-flex justify-content-between align-item-center">
                             <button type="submit" class="btn btn-primary px-5 h-50">Submit</button>
-                            <a href="<?php echo DOMAIN.'?c=redirect&a=index' ?>" class="btn btn-primary my-3">Back
+                            <a href="<?php echo DOMAIN.'?c=paypal&a=index' ?>" class="btn btn-primary my-3">Back
                                 home</a>
                         </div>
 

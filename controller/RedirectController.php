@@ -1,5 +1,5 @@
 <?php
-class DomainController{
+class RedirectController{
     protected $model;
 
     public function __construct()
@@ -8,14 +8,15 @@ class DomainController{
     }
 
     public function index(){
-        $domains = $this->model->all();
-        include('views/home');
+        $redirects = $this->model->all();
+
+        include('views/admin/redirect/index.php');
     }
 
 
     public function add() {
                 
-        include('views/admin/domain/add.php');
+        include('views/admin/redirect/add.php');
         // header('Location: views/admin/add.php');
     }
 
@@ -50,13 +51,13 @@ class DomainController{
         if ($domain === false) {
             die("User not found.");
         }
-        include('views/admin/domain/edit.php');
+        include('views/admin/redirect/edit.php');
     }
 
     public function delete() {
         $id = $_GET['id'];
         if($this->model->destroy($id)){
-            header("Location: index.php?c=home"); 
+            header("Location: index.php?c=redirect"); 
         }
     }
 }

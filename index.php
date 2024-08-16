@@ -8,8 +8,12 @@ session_start();
     include("controller/AccountController.php");
     include("model/Login.php");
     include("model/Account.php");
+    include("model/Redirect.php");
     include("model/Domain.php");
+    include("model/Paypal.php");
     include("controller/DomainController.php");
+    include("controller/RedirectController.php");
+    include("controller/PaypalController.php");
     
     $c = isset($_GET['c']) ? $_GET['c'] : 'login';
     $a = isset($_GET['a']) ? $_GET['a'] : 'index';
