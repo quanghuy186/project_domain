@@ -35,10 +35,40 @@ if (!isset($_SESSION['name'])) {
 </head>
 <!--end::Head-->
 <!--begin::Body-->
-
+<?php
+if (isset($_SESSION['notification'])) {
+    $notification = $_SESSION['notification'];
+    if ($notification['end_time'] <= time()) {
+        unset($_SESSION['notification']);
+    } else {
+?>
+<div id="notification" class="alert alert-<?= $notification['type'] ?>"><?= $notification['message'] ?></div>
+<script>
+setTimeout(function() {
+    document.getElementById('notification').style.display = 'none';
+}, 3000);
+</script>
+<?php
+    }
+}
+?>
 
 <?php
-    var_dump($domains)
+if (isset($_SESSION['error'])) {
+    $notification = $_SESSION['error'];
+    if ($notification['end_time'] <= time()) {
+        unset($_SESSION['error']);
+    } else {
+?>
+<div id="notification" class="alert alert-<?= $notification['type'] ?>"><?= $notification['message'] ?></div>
+<script>
+setTimeout(function() {
+    document.getElementById('notification').style.display = 'none';
+}, 3000);
+</script>
+<?php
+    }
+}
 ?>
 
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
@@ -127,8 +157,6 @@ if (!isset($_SESSION['name'])) {
                                 All Messages</a>
                         </div>
                     </li>
-                    <!--end::Messages Dropdown Menu-->
-                    <!--begin::Notifications Dropdown Menu-->
 
                     <!--end::Notifications Dropdown Menu-->
                     <!--begin::Fullscreen Toggle-->
@@ -256,104 +284,19 @@ if (!isset($_SESSION['name'])) {
                 <div class="pb-3">
                     <a href="index.php?c=account&a=add">
                         <div class="btn btn-success">
-                            <span class="">Add new</span>
+                            <span class="">Add new user</span>
                             <i class="bi bi-plus"></i>
                         </div>
                     </a>
                 </div>
 
-                <!--begin::Container-->
-                <div class="col-md">
-                    <div class="card mb-4">
-                        <div class="card-header">
-                            <h3 class="card-title">Manager</h3>
-                        </div> <!-- /.card-header -->
-                        <div class="card-body">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th style="width: 10px">STT</th>
-                                        <th>User Name</th>
-                                        <th>Public Key</th>
-                                        <th>Server Key</th>
-                                        <th>Create At</th>
-                                        <th>Active</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php if (!empty($users)): ?>
-                                    <?php $stt = 1; ?>
-                                    <?php foreach ($users as $user): ?>
-                                    <tr class="align-middle">
-                                        <td><?php echo $stt++; ?>.</td>
-                                        <td><?php echo htmlspecialchars($user['username']); ?></td>
-                                        <td><?php echo htmlspecialchars($user['public_key']); ?></td>
-                                        <td><?php echo htmlspecialchars($user['server_key']); ?></td>
-                                        <td><?php echo htmlspecialchars(date('Y-m-d H:i:s', strtotime($user['created_at']))); ?>
-                                        </td> <!-- Hiển thị ngày tạo -->
-                                        <td><?php echo $user['is_active'] ? 'Active' : 'Inactive'; ?></td>
-                                        <td>
-                                            <a href="index.php?c=account&a=edit&id=<?php echo $user['id']; ?>"
-                                                class="btn btn-primary"><i class="bi bi-pencil-square"></i></a>
-
-                                            <!-- Nút xóa -->
-                                            <button class="btn btn-danger delete-btn" data-id="{{ $item->id }}"
-                                                data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">
-                                                <i class="bi bi-trash"></i>
-                                            </button>
-
-                                            <!-- Modal xác nhận xóa -->
-                                            <div class="modal fade" id="confirmDeleteModal" tabindex="-1"
-                                                aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="confirmDeleteModalLabel">Xác
-                                                                nhận xóa</h5>
-                                                            <button type="button" class="btn-close"
-                                                                data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            Bạn có chắc chắn muốn xóa mục này?
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary"
-                                                                data-bs-dismiss="modal">Hủy</button>
-                                                            <button type="button"
-                                                                class="btn btn-danger confirm-delete-btn text-white">
-                                                                <a
-                                                                    href="index.php?c=account&a=delete&id=<?php echo $user['id']; ?>">Xóa</a>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-
-                                            <!-- <a href="index.php?c=account&a=delete&id=<?php echo $user['id']; ?>"
-                                                class="btn btn-danger"><i class="bi bi-trash"></i></a> -->
-                                        </td>
-                                    </tr>
-                                    <?php endforeach; ?>
-                                    <?php else: ?>
-                                    <tr>
-                                        <td colspan="7" class="text-center">No records found.</td>
-                                    </tr>
-                                    <?php endif; ?>
-                                </tbody>
-                            </table>
+                <div class="pb-3">
+                    <a href="index.php?c=domain&a=add">
+                        <div class="btn btn-success">
+                            <span class="">Add new domain</span>
+                            <i class="bi bi-plus"></i>
                         </div>
-
-                        <div class="card-footer clearfix">
-                            <ul class="pagination pagination-sm m-0 float-end">
-                                <li class="page-item"> <a class="page-link" href="#">«</a> </li>
-                                <li class="page-item"> <a class="page-link" href="#">1</a> </li>
-                                <li class="page-item"> <a class="page-link" href="#">»</a> </li>
-                            </ul>
-                        </div>
-                    </div> <!-- /.card -->
-
+                    </a>
                 </div>
 
                 <div class="col-md">
@@ -366,42 +309,48 @@ if (!isset($_SESSION['name'])) {
                                 <thead>
                                     <tr>
                                         <th style="width: 10px">STT</th>
-                                        <th>User Name</th>
+                                        <th>Domain Name</th>
                                         <th>Public Key</th>
                                         <th>Server Key</th>
-                                        <th>Create At</th>
                                         <th>Active</th>
-                                        <th>Action</th>
+                                        <th class="text-center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <?php if (!empty($domains)): ?>
+                                    <?php $stt = 1; ?>
+                                    <?php foreach ($domains as $domain): ?>
                                     <tr class="align-middle">
-                                        <td>1.</td>
-                                        <td>admin</td>
-                                        <td>sddssdfds</td>
-                                        <td>sddssddsf</td>
-                                        <td>2024-08-15 22:31:51 </td> <!-- Hiển thị ngày tạo -->
-                                        <td>Active</td>
-                                        <td>
-                                            <a href="index.php?c=account&amp;a=edit&amp;id=7" class="btn btn-primary"><i
-                                                    class="bi bi-pencil-square"></i></a>
+                                        <td><?php echo $stt++; ?>.</td>
+                                        <td><?php echo htmlspecialchars($domain['domain_name']); ?></td>
+                                        <td><?php echo htmlspecialchars($domain['public_key']); ?></td>
+                                        <td><?php echo htmlspecialchars($domain['serve_key']); ?></td>
+                                        <td><?php echo $domain['is_active'] ? 'Active' : 'Inactive'; ?></td>
+                                        <td class="text-center">
+                                            <a href="index.php?c=domain&a=edit&id=<?php echo $domain['id']; ?>"
+                                                class="btn btn-primary">
+                                                <i class="bi bi-pencil-square"></i>
+                                            </a>
 
-                                            <!-- Nút xóa -->
-                                            <button class="btn btn-danger delete-btn" data-id="{{ $item->id }}"
-                                                data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">
+                                            <!-- Nút Xóa kích hoạt modal -->
+                                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                                data-bs-target="#deleteModal<?php echo $domain['id']; ?>">
                                                 <i class="bi bi-trash"></i>
                                             </button>
 
-                                            <!-- Modal xác nhận xóa -->
-                                            <div class="modal fade" id="confirmDeleteModal" tabindex="-1"
-                                                aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="deleteModal<?php echo $domain['id']; ?>"
+                                                tabindex="-1"
+                                                aria-labelledby="deleteModalLabel<?php echo $domain['id']; ?>"
+                                                aria-hidden="true">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title" id="confirmDeleteModalLabel">Xác
+                                                            <h5 class="modal-title"
+                                                                id="deleteModalLabel<?php echo $domain['id']; ?>">Xác
                                                                 nhận xóa</h5>
                                                             <button type="button" class="btn-close"
-                                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                data-bs-dismiss="modal" aria-label="Đóng"></button>
                                                         </div>
                                                         <div class="modal-body">
                                                             Bạn có chắc chắn muốn xóa mục này?
@@ -409,69 +358,24 @@ if (!isset($_SESSION['name'])) {
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary"
                                                                 data-bs-dismiss="modal">Hủy</button>
-                                                            <button type="button"
-                                                                class="btn btn-danger confirm-delete-btn text-white">
-                                                                <a
-                                                                    href="index.php?c=account&amp;a=delete&amp;id=7">Xóa</a>
-                                                            </button>
+                                                            <a href="index.php?c=domain&a=delete&id=<?php echo $domain['id']; ?>"
+                                                                class="btn btn-danger">
+                                                                Xóa
+                                                            </a>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-
-
-                                            <!-- <a href="index.php?c=account&a=delete&id=7"
-                                                class="btn btn-danger"><i class="bi bi-trash"></i></a> -->
                                         </td>
                                     </tr>
-                                    <tr class="align-middle">
-                                        <td>2.</td>
-                                        <td>quanghuy186aaa</td>
-                                        <td>dfgdfgdfg</td>
-                                        <td>dfgfdgfdgfdg</td>
-                                        <td>2024-08-15 22:53:38 </td> <!-- Hiển thị ngày tạo -->
-                                        <td>Inactive</td>
-                                        <td>
-                                            <a href="index.php?c=account&amp;a=edit&amp;id=8" class="btn btn-primary"><i
-                                                    class="bi bi-pencil-square"></i></a>
-
-                                            <!-- Nút xóa -->
-                                            <button class="btn btn-danger delete-btn" data-id="{{ $item->id }}"
-                                                data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">
-                                                <i class="bi bi-trash"></i>
-                                            </button>
-
-                                            <!-- Modal xác nhận xóa -->
-                                            <div class="modal fade" id="confirmDeleteModal" tabindex="-1"
-                                                aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="confirmDeleteModalLabel">Xác
-                                                                nhận xóa</h5>
-                                                            <button type="button" class="btn-close"
-                                                                data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            Bạn có chắc chắn muốn xóa mục này?
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary"
-                                                                data-bs-dismiss="modal">Hủy</button>
-                                                            <button type="button"
-                                                                class="btn btn-danger confirm-delete-btn text-white">
-                                                                <a
-                                                                    href="index.php?c=account&amp;a=delete&amp;id=8">Xóa</a>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- <a href="index.php?c=account&a=delete&id=8"
-                                                class="btn btn-danger"><i class="bi bi-trash"></i></a> -->
-                                        </td>
+                                    <?php endforeach; ?>
+                                    <?php else: ?>
+                                    <tr>
+                                        <td colspan="7" class="text-center">Không có bản ghi nào.</td>
                                     </tr>
+                                    <?php endif; ?>
                                 </tbody>
+
                             </table>
                         </div>
 

@@ -4,7 +4,7 @@ class DomainController{
 
     public function __construct()
     {
-        $this->model = new Domain();
+        $this->model = new Redirect();
     }
 
     public function index(){

@@ -44,26 +44,54 @@ class Account {
     }
 
     public function changePassword(){
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $oldPassword = $_POST['old_password'];
-            $newPassword = $_POST['new_password'];
-        
-            $stmt = $this->conn->prepare("SELECT * FROM accounts WHERE id = :user_id");
-            $stmt->bindParam(':user_id', $_SESSION['user_id']);
-            $stmt->execute();
-            $user = $stmt->fetch(PDO::FETCH_ASSOC);
-        
-            if (password_verify($oldPassword, $user['password'])) {
-                $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
-                $stmt = $this->conn->prepare("UPDATE accounts SET password = :password WHERE id = :user_id");
-                $stmt->bindParam(':password', $hashedPassword);
+        $oldPassword = $_POST['old_password'];
+        $newPassword = $_POST['new_password'];
+        $cpassword = $_POST['cpassword'];
+
+        if($newPassword == $cpassword){
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                $oldPassword = $_POST['old_password'];
+                $newPassword = $_POST['new_password'];
+            
+                $stmt = $this->conn->prepare("SELECT * FROM accounts WHERE id = :user_id");
                 $stmt->bindParam(':user_id', $_SESSION['user_id']);
                 $stmt->execute();
-                echo "Đổi mật khẩu thành công!";
-                header("Location: ?c=home");
-            } else {
-                echo "Mật khẩu cũ không đúng.";
+                $user = $stmt->fetch(PDO::FETCH_ASSOC);
+            
+                if (password_verify($oldPassword, $user['password'])) {
+                    $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+                    $stmt = $this->conn->prepare("UPDATE accounts SET password = :password WHERE id = :user_id");
+                    $stmt->bindParam(':password', $hashedPassword);
+                    $stmt->bindParam(':user_id', $_SESSION['user_id']);
+                    
+                    $_SESSION['notification'] = [
+                        'message' => 'Thao tác của bạn đã được thực hiện thành công.',
+                        'type' => 'success',
+                        'start_time' => time(),
+                        'end_time' => time() + 3 
+                    ];
+                    $stmt->execute();
+                    header("Location: ?c=home");
+                } else { 
+                    $err = "Mật khẩu cũ không đúng.";
+                    $_SESSION['error'] = [
+                        'message' => $err,
+                        'type' => 'danger',
+                        'start_time' => time(),
+                        'end_time' => time() + 3 
+                    ];
+                    header("Location: ?c=account&a=changePass");
+                }
             }
+        }else{
+            $err = "Vui lòng nhập đúng mật khẩu";
+            $_SESSION['error'] = [
+                'message' => $err,
+                'type' => 'danger',
+                'start_time' => time(),
+                'end_time' => time() + 3 
+            ];
+            header("Location: ?c=account&a=changePass");
         }
     }
 }

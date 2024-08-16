@@ -10,10 +10,10 @@
     }
 
     public function index() {
-        $users = $this->model->all();
-        include('views/home.php');
-        // $domains = $this->domain->all();
+        // $users = $this->model->all();
         // include('views/home.php');
+        $domains = $this->domain->all();
+        include('views/home.php');
     }
 
     public function edit($id) {
