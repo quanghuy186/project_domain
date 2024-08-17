@@ -29,31 +29,11 @@
     <!--end::App Content Header-->
     <!--begin::App Content-->
     <div class="app-content">
-        <!-- <div class="pb-3">
-                <a href="index.php?c=redirect&a=index">
-                    <div class="btn btn-success">
-                        <span class="">Redirect</span>
-                    </div>
-                </a>
-            </div>
-
-            <div class="pb-3 px-5">
-                <a href="index.php?c=paypal">
-                    <div class="btn btn-success">
-                        <span class="">Paypal</span>
-                    </div>
-                </a>
-            </div> -->
-
         <a href="index.php?c=domain&a=add">
             <div class="btn btn-success">
                 <span class="">Add Domain</span>
             </div>
         </a>
-
-
-
-
 
         <div class="col-md">
             <div class="card mb-4">
@@ -81,7 +61,18 @@
                                 <td><?php echo htmlspecialchars($domain['domain_name']); ?></td>
                                 <td><?php echo htmlspecialchars($domain['public_key']); ?></td>
                                 <td><?php echo htmlspecialchars($domain['serve_key']); ?></td>
-                                <td><?php echo $domain['is_active'] ? 'Active' : 'Inactive'; ?></td>
+
+
+                                <td><?php echo $domain['is_active'] ? 'Active' : 'Inactive'; ?>
+                                    <select name="selectActive " class="selectActive form-select"
+                                        data-id="<?php echo $domain['id']; ?>">
+                                        <option value="0">Active</option>
+                                        <option value="1">Inactive</option>
+                                    </select>
+                                </td>
+
+
+
                                 <td class="text-center">
                                     <a href="index.php?c=domain&a=edit&id=<?php echo $domain['id']; ?>"
                                         class="btn btn-primary">
@@ -144,10 +135,14 @@
             </div> <!-- /.card -->
 
         </div>
-
-        <!--end::Container-->
     </div>
-    <!--end::App Content-->
+
+    <script type="text/javascript">
+    $('.selectActive').change(function() {
+        alert('ok');
+    })
+    </script>
+
 </main>
 
 <?php

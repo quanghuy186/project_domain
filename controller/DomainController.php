@@ -12,7 +12,6 @@ class DomainController{
         include('views/home');
     }
 
-
     public function add() {
                 
         include('views/admin/domain/add.php');
@@ -30,7 +29,6 @@ class DomainController{
         }
     }
     
-
     public function update(){
         $id = $_POST['id'];
         $rs = $this->model->upgrade($id);

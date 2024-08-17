@@ -20,6 +20,7 @@
                             <th>Paypal email</th>
                             <th>Active</th>
                             <th>Is died</th>
+                            <th>Is sandbox</th>
                             <th class="text-center">Action</th>
                         </tr>
                     </thead>
@@ -32,6 +33,8 @@
                             <td><?php echo htmlspecialchars($item['paypal_email']); ?></td>
                             <td><?php echo $item['is_active'] ? 'Active' : 'Inactive'; ?></td>
                             <td><?php echo $item['is_died'] ? 'Active' : 'Inactive'; ?></td>
+                            <td><?php echo $item['is_sandbox'] ? 'Active' : 'Inactive'; ?></td>
+
                             <td class="text-center">
                                 <!-- edit -->
 

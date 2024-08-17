@@ -12,7 +12,7 @@ class Domain{
 
     public function all(){
         try{
-            $stm = $this->conn->query('SELECT * FROM domains');
+            $stm = $this->conn->query('SELECT * FROM stores');
             $stm->execute();
             return $stm->fetchAll(PDO::FETCH_ASSOC);
         }catch(Exception $e){
@@ -26,7 +26,7 @@ class Domain{
         $publicKey = $_POST['public_key'];
         $serverKey = $_POST['serve_key'];
         $isActive = isset($_POST['is_active']) ? 1 : 0;
-        $stm = $this->conn->prepare("INSERT INTO domains (domain_name, public_key, serve_key, is_active) VALUES (:domain_name, :public_key, :serve_key, :is_active)");
+        $stm = $this->conn->prepare("INSERT INTO stores (domain_name, public_key, serve_key, is_active) VALUES (:domain_name, :public_key, :serve_key, :is_active)");
         $stm->bindParam(':domain_name', $domain_name);
         $stm->bindParam(':public_key', $publicKey);
         $stm->bindParam(':serve_key', $serverKey);
@@ -43,7 +43,7 @@ class Domain{
             $serveKey = $_POST['serve_key'];
             $isActive = isset($_POST['is_active']) ? 1 : 0;
         
-            $stm = $this->conn->prepare("UPDATE domains SET domain_name = :domain_name, public_key = :public_key, serve_key = :serve_key, is_active = :is_active WHERE id = :id");
+            $stm = $this->conn->prepare("UPDATE stores SET domain_name = :domain_name, public_key = :public_key, serve_key = :serve_key, is_active = :is_active WHERE id = :id");
             
             $stm->bindParam(':id', $id);
             $stm->bindParam(':domain_name', $domain_name);
@@ -61,7 +61,7 @@ class Domain{
 
     public function find($id) {
         try {
-            $stmt = $this->conn->prepare("SELECT * FROM domains WHERE id = :id");
+            $stmt = $this->conn->prepare("SELECT * FROM stores WHERE id = :id");
             $stmt->execute(['id' => $id]);
             return $stmt->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
@@ -72,7 +72,7 @@ class Domain{
 
     public function destroy($id){
         try {
-            $stmt = $this->conn->prepare("DELETE FROM domains WHERE id = :id");
+            $stmt = $this->conn->prepare("DELETE FROM stores WHERE id = :id");
             $stmt->execute(['id' => $id]);
             return $stmt->rowCount() > 0; 
         } catch (PDOException $e) {

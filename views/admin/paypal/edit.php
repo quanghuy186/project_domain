@@ -30,12 +30,18 @@
                             <label for="is_died" class="form-check-label">Is Died</label>
                         </div>
 
+                        <div class="form-check mb-3">
+                            <input type="checkbox" id="is_sandbox" name="is_sandbox" class="form-check-input" value="1"
+                                <?php echo $domain['is_sandbox'] ? 'checked' : ''; ?>>
+                            <label for="is_sandbox" class="form-check-label">Is Sandbox</label>
+                        </div>
+
+
                         <div class="d-flex justify-content-between align-item-center">
                             <button type="submit" class="btn btn-primary px-5 h-50">Submit</button>
                             <a href="<?php echo DOMAIN.'?c=paypal&a=index' ?>" class="btn btn-primary my-3">Back
                                 home</a>
                         </div>
-
                     </form>
                 </div>
             </div>
