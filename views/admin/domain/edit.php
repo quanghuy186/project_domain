@@ -10,10 +10,9 @@
                 <h3 class="card-title">Manager Paypal </h3>
             </div> <!-- /.card-header -->
             <div class="card-body">
-
                 <div class="container mt-5">
                     <h2>Edit Domain Information</h2>
-                    <form action="index.php?c=domain&a=update" method="post">
+                    <form action="index.php?c=domain&a=update&id=<?php echo $domain['id'] ?>" method="post">
                         <div class="mb-3">
                             <input hidden type="text" class="form-control" id="id" name="id"
                                 value="<?php echo $domain['id']; ?>" readonly>

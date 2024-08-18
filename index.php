@@ -11,9 +11,11 @@ session_start();
     include("model/Redirect.php");
     include("model/Domain.php");
     include("model/Paypal.php");
+    include("model/PaypalGroup.php");
     include("controller/DomainController.php");
     include("controller/RedirectController.php");
     include("controller/PaypalController.php");
+    include("controller/PaypalGroupController.php");
     
     $c = isset($_GET['c']) ? $_GET['c'] : 'login';
     $a = isset($_GET['a']) ? $_GET['a'] : 'index';

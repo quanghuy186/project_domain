@@ -7,24 +7,28 @@
     <div class="col-md">
         <div class="card mb-4">
             <div class="card-header">
-                <h3 class="card-title">Manager Paypal </h3>
+                <h3 class="card-title">Manager Domain </h3>
             </div> <!-- /.card-header -->
             <div class="card-body">
-
                 <div class="container mt-5">
                     <h2>Add Domain Information</h2>
+                    <!-- <?php
+                                // if(isset($err)){
+                                //     echo  $err;
+                                // }
+                            ?> -->
                     <form action="index.php?c=domain&a=store" method="post">
                         <div class="mb-3">
                             <label for="domain_name" class="form-label">Domain Name</label>
-                            <input type="text" class="form-control" id="domain_name" name="domain_name" required>
+                            <input type="text" class="form-control" id="domain_name" name="domain_name">
                         </div>
                         <div class="mb-3">
                             <label for="public_key" class="form-label">Public Key</label>
-                            <input type="text" class="form-control" id="public_key" name="public_key" required>
+                            <input type="text" class="form-control" id="public_key" name="public_key">
                         </div>
                         <div class="mb-3">
                             <label for="serve_key" class="form-label">Serve Key</label>
-                            <input type="text" class="form-control" id="serve_key" name="serve_key" required>
+                            <input type="text" class="form-control" id="serve_key" name="serve_key">
                         </div>
                         <div class="mb-3 form-check">
                             <input type="checkbox" class="form-check-input" id="is_active" name="is_active">

@@ -23,14 +23,16 @@ class DomainController{
         // Example: $data = $this->validateInput();
         $rs = $this->model->save();
         if($rs){
-           
+            echo json_encode(['status' => 'success', 'message' => 'Success full.']);
         } else {
-            echo json_encode(['status' => 'error', 'message' => 'Failed to save record.']);
+            $err = "Thêm mới thất bại!";
+            include('views/admin/domain/add.php');
+            // echo json_encode(['status' => 'error', 'message' => 'Failed to save record.']);
         }
     }
     
     public function update(){
-        $id = $_POST['id'];
+        $id = $_GET['id'];
         $rs = $this->model->upgrade($id);
         if($rs){
             echo json_encode(['status' => 'success', 'message' => 'Record saved successfully.']);

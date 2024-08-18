@@ -1,39 +1,4 @@
 <!--begin::Body-->
-<?php
-if (isset($_SESSION['notification'])) {
-    $notification = $_SESSION['notification'];
-    if ($notification['end_time'] <= time()) {
-        unset($_SESSION['notification']);
-    } else {
-?>
-<div id="notification" class="alert alert-<?= $notification['type'] ?>"><?= $notification['message'] ?></div>
-<script>
-setTimeout(function() {
-    document.getElementById('notification').style.display = 'none';
-}, 3000);
-</script>
-<?php
-    }
-}
-?>
-
-<?php
-if (isset($_SESSION['error'])) {
-    $notification = $_SESSION['error'];
-    if ($notification['end_time'] <= time()) {
-        unset($_SESSION['error']);
-    } else {
-?>
-<div id="notification" class="alert alert-<?= $notification['type'] ?>"><?= $notification['message'] ?></div>
-<script>
-setTimeout(function() {
-    document.getElementById('notification').style.display = 'none';
-}, 3000);
-</script>
-<?php
-    }
-}
-?>
 
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
     <!--begin::App Wrapper-->
@@ -46,13 +11,15 @@ setTimeout(function() {
                 <ul class="navbar-nav">
                     <li class="nav-item"> <a class="nav-link" data-lte-toggle="sidebar" href="#" role="button"> <i
                                 class="bi bi-list"></i> </a> </li>
-
                     </li>
                     <li class="nav-item d-none d-md-block"> <a href="index.php?c=home" class="nav-link">Home</a> </li>
                     <li class="nav-item d-none d-md-block"> <a href="index.php?c=redirect" class="nav-link">Redirect</a>
                     <li class="nav-item d-none d-md-block"> <a href="index.php?c=home" class="nav-link">Domain</a>
                     </li>
                     <li class="nav-item d-none d-md-block"> <a href="index.php?c=paypal" class="nav-link">Paypal</a>
+                    </li>
+                    <li class="nav-item d-none d-md-block"> <a href="index.php?c=paypalGroup" class="nav-link">Paypal
+                            Group</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav ms-auto">

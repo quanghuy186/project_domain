@@ -2,7 +2,7 @@
 if (!isset($_SESSION['name'])) {
     header("Location: index.php?c=login");
     exit();
-    }
+}
 ?>
 
 <!DOCTYPE html>

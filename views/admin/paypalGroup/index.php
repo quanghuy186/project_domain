@@ -7,39 +7,33 @@
     <div class="col-md">
         <div class="card mb-4">
             <div class="card-header">
-                <h3 class="card-title">Manager Paypal </h3>
+                <h3 class="card-title">Manager Paypal Group</h3>
             </div> <!-- /.card-header -->
             <div class="card-body">
-                <a href="<?php echo DOMAIN."?c=paypal&a=add" ?>" class="btn btn-success my-3">Add Paypal</a>
+                <a href="<?php echo DOMAIN."?c=paypalGroup&a=add" ?>" class="btn btn-success my-3">Add Paypal Group</a>
                 <a href="index.php?c=home" class="btn btn-primary my-3">Back Home</a>
 
                 <table class="table table-bordered">
                     <thead>
                         <tr>
                             <th style="width: 10px">STT</th>
-                            <th>Paypal email</th>
-                            <th>Group Name</th>
-                            <th>Active</th>
-                            <th>Is died</th>
-                            <th>Is sandbox</th>
+                            <th>Paypal group name</th>
+                            <th>Time stamp</th>
                             <th class="text-center">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php if (!empty($paypals)): ?>
+                        <?php if (!empty($paypalGroups)): ?>
                         <?php $stt = 1; ?>
-                        <?php foreach ($paypals as $item): ?>
+                        <?php foreach ($paypalGroups as $item): ?>
                         <tr class="align-middle">
                             <td><?php echo $stt++; ?>.</td>
-                            <td><?php echo htmlspecialchars($item['paypal_email']); ?></td>
                             <td><?php echo htmlspecialchars($item['group_name']); ?></td>
-                            <td><?php echo $item['is_active'] ? 'Active' : 'Inactive'; ?></td>
-                            <td><?php echo $item['is_died'] ? 'Active' : 'Inactive'; ?></td>
-                            <td><?php echo $item['is_sandbox'] ? 'Active' : 'Inactive'; ?></td>
+                            <td><?php echo htmlspecialchars($item['time_stamp']); ?></td>
 
                             <td class="text-center">
                                 <!-- edit -->
-                                <a href="index.php?c=paypal&a=edit&id=<?php echo $item['id']; ?>"
+                                <a href="index.php?c=paypalGroup&a=edit&id=<?php echo $item['id']; ?>"
                                     class="btn btn-primary">
                                     <i class="bi bi-pencil-square"></i>
                                 </a>
@@ -68,7 +62,7 @@
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
                                                     data-bs-dismiss="modal">Hủy</button>
-                                                <a href="index.php?c=paypal&a=delete&id=<?php echo $item['id']; ?>"
+                                                <a href="index.php?c=paypalGroup&a=delete&id=<?php echo $item['id']; ?>"
                                                     class="btn btn-danger">
                                                     Xóa
                                                 </a>

@@ -1,21 +1,23 @@
 <?php
 class PaypalController{
     protected $model;
+    protected $paypalGroup;
 
     public function __construct()
     {
         $this->model = new Paypal();
+        $this->paypalGroup = new PaypalGroup();
     }
 
     public function index(){
         $paypals = $this->model->all();
-
+        
         include('views/admin/paypal/index.php');
     }
 
 
     public function add() {
-                
+        $paypalGroups = $this->paypalGroup->all();
         include('views/admin/paypal/add.php');
         // header('Location: views/admin/add.php');
     }

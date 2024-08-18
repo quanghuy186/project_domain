@@ -26,8 +26,7 @@
         </div>
         <!--end::Container-->
     </div>
-    <!--end::App Content Header-->
-    <!--begin::App Content-->
+
     <div class="app-content">
         <a href="index.php?c=domain&a=add">
             <div class="btn btn-success">
@@ -62,16 +61,15 @@
                                 <td><?php echo htmlspecialchars($domain['public_key']); ?></td>
                                 <td><?php echo htmlspecialchars($domain['serve_key']); ?></td>
 
-
                                 <td><?php echo $domain['is_active'] ? 'Active' : 'Inactive'; ?>
-                                    <select name="selectActive " class="selectActive form-select"
+                                    <!-- <select name="selectActive " class="selectActive form-select"
                                         data-id="<?php echo $domain['id']; ?>">
-                                        <option value="0">Active</option>
-                                        <option value="1">Inactive</option>
-                                    </select>
+                                        <option value="0" <?php echo $domain['is_active'] ? 'selected' : ''; ?>>Active
+                                        </option>
+                                        <option value="1" <?php echo $domain['is_active'] ? 'selected' : ''; ?>>Inactive
+                                        </option>
+                                    </select> -->
                                 </td>
-
-
 
                                 <td class="text-center">
                                     <a href="index.php?c=domain&a=edit&id=<?php echo $domain['id']; ?>"
@@ -137,12 +135,30 @@
         </div>
     </div>
 
-    <script type="text/javascript">
-    $('.selectActive').change(function() {
-        alert('ok');
-    })
-    </script>
+    <!-- <script>
+    $(document).ready(function() {
+        $('.selectActive').on('change', function() {
+            var domainId = $(this).data('id');
+            var isActive = $(this).val();
 
+            alert(domainId + '');
+            $.ajax({
+                url: '?c=domain&a=update',
+                type: 'POST',
+                data: {
+                    id: domainId,
+                    is_active: isActive
+                },
+                success: function(response) {
+                    alert('Status updated successfully!');
+                },
+                error: function(xhr, status, error) {
+                    alert('Error: ' + error);
+                }
+            });
+        });
+    });
+    </script> -->
 </main>
 
 <?php

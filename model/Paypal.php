@@ -1,7 +1,6 @@
 <?php
     class Paypal{
         public $conn;
-
         public function __construct() {
             $db = new DB('localhost', 'root', '', 'admin');
             $this->conn = $db->connect();
@@ -11,32 +10,35 @@
         }
     
         public function all(){
-            try{
-                $stm = $this->conn->query('SELECT * FROM paypal_accounts');
-                $stm->execute();
-                return $stm->fetchAll(PDO::FETCH_ASSOC);
-            }catch(Exception $e){
-                error_log("Query failed: " . $e->getMessage());
-                return false; // Hoặc throw exception nếu cần
-            };
+            $sql = "SELECT paypal_accounts.*, paypal_group.group_name FROM paypal_accounts JOIN paypal_group ON paypal_accounts.paypal_group_id = paypal_group.id";
+            $stm = $this->conn->prepare($sql);
+            $stm->execute();
+            return $stm->fetchAll(PDO::FETCH_ASSOC);
         }
-    
-        public function save(){
+        
+        public function save() {
+            $paypal_group_id = $_POST['paypal_group_id'];
             $paypal_email = $_POST['paypal_email'];
             $isActive = isset($_POST['is_active']) ? 1 : 0;
             $isDied = isset($_POST['is_died']) ? 1 : 0;
             $is_sandbox = isset($_POST['is_sandbox']) ? 1 : 0;
-            $stm = $this->conn->prepare("INSERT INTO paypal_accounts (paypal_email, is_active, is_died, is_sandbox) VALUES (:paypal_email, :is_active, :is_died, :is_sandbox)");
+        
+            $sql = "INSERT INTO paypal_accounts (paypal_group_id, paypal_email, is_active, is_died, is_sandbox) 
+                    VALUES (:paypal_group_id, :paypal_email, :is_active, :is_died, :is_sandbox)";
+            $stm = $this->conn->prepare($sql);
+        
+            $stm->bindParam(':paypal_group_id', $paypal_group_id);
             $stm->bindParam(':paypal_email', $paypal_email);
             $stm->bindParam(':is_active', $isActive);
             $stm->bindParam(':is_died', $isDied);
             $stm->bindParam(':is_sandbox', $is_sandbox);
+        
             if ($stm->execute()) {
                 header("Location: index.php?c=paypal"); 
-                echo "Failed to add user";
-            }
+                exit(); 
+            } 
         }
-    
+        
         public function upgrade($id){
                 $paypal_email = $_POST['paypal_email'];
                 $isActive = isset($_POST['is_active']) ? 1 : 0;

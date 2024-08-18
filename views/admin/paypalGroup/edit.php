@@ -7,29 +7,29 @@
     <div class="col-md">
         <div class="card mb-4">
             <div class="card-header">
-                <h3 class="card-title">Manager redirect </h3>
+                <h3 class="card-title">Manager Paypal Group</h3>
             </div> <!-- /.card-header -->
             <div class="card-body">
                 <div class="container mt-5">
-                    <h2>Add Domain Information</h2>
-                    <form action="index.php?c=redirect&a=update&id=<?php echo $redirect['id'] ?> " method="post">
+                    <h2>Edit Paypal Group Information</h2>
+                    <form action="index.php?c=paypalGroup&a=update&id=<?php echo $paypalGroup['id'] ?>" method="post">
                         <div class="mb-3">
-                            <label for="domain_name" class="form-label">Domain Name</label>
-                            <input type="text" class="form-control" id="domain_name" name="domain_name"
-                                value="<?php echo $redirect['domain_name']; ?>" required>
+                            <label for="group_name" class="form-label">Group Name</label>
+                            <input type="text" class="form-control" id="group_name" name="group_name"
+                                value="<?php echo $paypalGroup['group_name']; ?>" required>
                         </div>
-                        <div class="form-check mb-3">
-                            <input type="checkbox" id="is_active" name="is_active" class="form-check-input" value="1"
-                                <?php echo $redirect['is_active'] ? 'checked' : ''; ?>>
-                            <label for="is_active" class="form-check-label">Is Active</label>
+
+                        <div class="mb-3">
+                            <label for="time_stamp" class="form-label">Time Stamp</label>
+                            <input readonly type="text" class="form-control" id="time_stamp" name="time_stamp"
+                                value="<?php echo $paypalGroup['time_stamp']; ?>">
                         </div>
 
                         <div class="d-flex justify-content-between align-item-center">
                             <button type="submit" class="btn btn-primary px-5 h-50">Submit</button>
-                            <a href="<?php echo DOMAIN.'?c=redirect&a=index' ?>" class="btn btn-primary my-3">Back
+                            <a href="<?php echo DOMAIN.'?c=paypalGroup&a=index' ?>" class="btn btn-primary my-3">Back
                                 home</a>
                         </div>
-
                     </form>
                 </div>
             </div>

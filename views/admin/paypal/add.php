@@ -33,12 +33,24 @@
                             <label class="form-check-label" for="is_sandbox">Is Sandbox</label>
                         </div>
 
-                        <div class="d-flex justify-content-between align-item-center">
+                        <select class="form-select w-25" aria-label="Default select example" name="paypal_group_id">
+                            <?php
+                                foreach($paypalGroups as $group){
+                                    $selected = ($group['id'] == $selectedGroupId) ? 'selected' : '';
+                            ?>
+                            <option class="paypal_group_id" value="<?php echo $group['id']?>" <?php echo $selected; ?>>
+                                <?php echo htmlspecialchars($group['group_name']); ?>
+                            </option>
+                            <?php
+                                }
+                            ?>
+                        </select>
+
+                        <div class="d-flex justify-content-between align-item-center mt-3">
                             <button type="submit" class="btn btn-primary px-5 h-50">Submit</button>
                             <a href="<?php echo DOMAIN.'?c=paypal&a=index' ?>" class="btn btn-primary my-3">Back
                                 home</a>
                         </div>
-
                     </form>
                 </div>
             </div>

@@ -1,35 +1,35 @@
 <?php
-class RedirectController{
+class PaypalGroupController{
     protected $model;
 
     public function __construct()
     {
-        $this->model = new Redirect();
+        $this->model = new PaypalGroup();
     }
 
     public function index(){
-        $redirects = $this->model->all();
+        $paypalGroups = $this->model->all();
 
-        include('views/admin/redirect/index.php');
+        include('views/admin/paypalGroup/index.php');
     }
 
 
     public function add() {
-                
-        include('views/admin/redirect/add.php');
+        include('views/admin/paypalGroup/add.php');
         // header('Location: views/admin/add.php');
     }
 
     public function store(){
+        // Validate the data before saving (if applicable)
+        // Example: $data = $this->validateInput();
         $rs = $this->model->save();
         if($rs){
-            echo json_encode(['status' => 'success', 'message' => 'Successfully.']);
+           
         } else {
             echo json_encode(['status' => 'error', 'message' => 'Failed to save record.']);
         }
     }
     
-
     public function update(){
         $id = $_GET['id'];
         $rs = $this->model->upgrade($id);
@@ -45,17 +45,17 @@ class RedirectController{
         if (!isset($id) || empty($id)) {
             die("Invalid ID provided.");
         }
-        $redirect = $this->model->find($id);
-        if ($redirect === false) {
+        $paypalGroup = $this->model->find($id);
+        if ($paypalGroup === false) {
             die("User not found.");
         }
-        include('views/admin/redirect/edit.php');
+        include('views/admin/paypalGroup/edit.php');
     }
 
     public function delete() {
         $id = $_GET['id'];
         if($this->model->destroy($id)){
-            header("Location: index.php?c=redirect"); 
+            header("Location: index.php?c=paypalGroup"); 
         }
     }
 }
