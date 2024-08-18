@@ -29,7 +29,6 @@ require(ROOT."/views/layouts/header.php");
                     <input type="password" name="password" id="password"
                         class="border-2 border-rose-600 w-full py-2 px-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-500"
                         placeholder="Your password">
-
                     <?php 
                         if ($_SERVER['REQUEST_METHOD'] == 'POST' && empty($_POST['password'])) {
                             echo "<div class='text-red-600 mt-2 text-left'>Please enter your password</div>";

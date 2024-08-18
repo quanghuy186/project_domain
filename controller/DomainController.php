@@ -19,15 +19,17 @@ class DomainController{
     }
 
     public function store(){
-        // Validate the data before saving (if applicable)
-        // Example: $data = $this->validateInput();
-        $rs = $this->model->save();
-        if($rs){
-            echo json_encode(['status' => 'success', 'message' => 'Success full.']);
-        } else {
-            $err = "Thêm mới thất bại!";
+        if(!empty($_POST['domain_name'])){
+            $rs = $this->model->save();
+            if($rs){
+                echo json_encode(['status' => 'success', 'message' => 'Success full.']);
+            } else {
+                $err = "Thêm mới thất bại!";
+                include('views/admin/domain/add.php');
+                // echo json_encode(['status' => 'error', 'message' => 'Failed to save record.']);
+            }
+        }else{
             include('views/admin/domain/add.php');
-            // echo json_encode(['status' => 'error', 'message' => 'Failed to save record.']);
         }
     }
     

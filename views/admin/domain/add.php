@@ -12,24 +12,36 @@
             <div class="card-body">
                 <div class="container mt-5">
                     <h2>Add Domain Information</h2>
-                    <!-- <?php
-                                // if(isset($err)){
-                                //     echo  $err;
-                                // }
-                            ?> -->
                     <form action="index.php?c=domain&a=store" method="post">
                         <div class="mb-3">
                             <label for="domain_name" class="form-label">Domain Name</label>
                             <input type="text" class="form-control" id="domain_name" name="domain_name">
                         </div>
+                        <?php
+                            if($_SERVER['REQUEST_METHOD'] == 'POST' && empty($_POST['domain_name'])){
+                                echo "<div class='text-danger text-left'>Please enter your domain name</div>";
+                            }
+                        ?>
+
                         <div class="mb-3">
                             <label for="public_key" class="form-label">Public Key</label>
                             <input type="text" class="form-control" id="public_key" name="public_key">
                         </div>
+                        <?php
+                            if($_SERVER['REQUEST_METHOD'] == 'POST' && empty($_POST['public_key'])){
+                                echo "<div class='text-danger text-left'>Please enter your public key</div>";
+                            }
+                        ?>
                         <div class="mb-3">
                             <label for="serve_key" class="form-label">Serve Key</label>
                             <input type="text" class="form-control" id="serve_key" name="serve_key">
                         </div>
+
+                        <?php
+                            if($_SERVER['REQUEST_METHOD'] == 'POST' && empty($_POST['serve_key'])){
+                                echo "<span class='text-danger text-left'>Please enter your server key</span>";
+                            }
+                        ?>
                         <div class="mb-3 form-check">
                             <input type="checkbox" class="form-check-input" id="is_active" name="is_active">
                             <label class="form-check-label" for="is_active">Is Active</label>

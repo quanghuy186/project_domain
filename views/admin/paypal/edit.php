@@ -18,6 +18,21 @@
                             <input type="text" class="form-control" id="paypal_email" name="paypal_email"
                                 value="<?php echo $domain['paypal_email']; ?>" required>
                         </div>
+                        <select class="form-select w-25 my-3" aria-label="Default select example"
+                            name="paypal_group_id">
+                            <?php
+                                foreach($paypalGroups as $group){
+                                    $selected = ($group['id'] == $currentPaypalGroupId['id']) ? 'selected' : '';
+                            ?>
+                            <option class="paypal_group_id" value="<?php echo $group['id']?>" <?php echo $selected; ?>>
+                                <?php echo htmlspecialchars($group['group_name']); ?>
+                            </option>
+                            <?php
+                        }
+                          ?>
+                        </select>
+
+
                         <div class="form-check mb-3">
                             <input type="checkbox" id="is_active" name="is_active" class="form-check-input" value="1"
                                 <?php echo $domain['is_active'] ? 'checked' : ''; ?>>

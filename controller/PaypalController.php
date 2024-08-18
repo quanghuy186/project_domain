@@ -33,7 +33,6 @@ class PaypalController{
         }
     }
     
-
     public function update(){
         $id = $_POST['id'];
         $rs = $this->model->upgrade($id);
@@ -49,6 +48,9 @@ class PaypalController{
         if (!isset($id) || empty($id)) {
             die("Invalid ID provided.");
         }
+        // lay ra paypal_group_id
+        $paypalGroups = $this->paypalGroup->all();
+        $currentPaypalGroupId = $this->model->getId($id);
         $domain = $this->model->find($id);
         if ($domain === false) {
             die("User not found.");

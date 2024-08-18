@@ -12,11 +12,9 @@ class LoginController {
         include(ROOT . "/views/login.php");
     }
 
-   
-
     public function xlLogin(){
         $result = $this->model->login();
-        $username = htmlspecialchars(trim($_POST['fullName']));
+        // $username = htmlspecialchars(trim($_POST['fullName']));
 
         if ($result) {
             header("Location: ?c=home&a=index");
