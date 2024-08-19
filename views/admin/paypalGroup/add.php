@@ -15,8 +15,14 @@
                     <form action="index.php?c=paypalGroup&a=store" method="post">
                         <div class="mb-3">
                             <label for="group_name" class="form-label">Group name</label>
-                            <input type="text" class="form-control" id="group_name" name="group_name" required>
+                            <input type="text" class="form-control" id="group_name" name="group_name">
                         </div>
+
+                        <?php
+                            if($_SERVER['REQUEST_METHOD'] == 'POST' && empty($_POST['group_name'])){
+                                echo "<div class='text-danger mb-3 text-left'>Please enter your paypal group name</div>";
+                            }
+                        ?>
                         <!-- 
                         <div class="mb-3">
                             <label for="time_stamp" class="form-label">Paypal Time Stamp</label>

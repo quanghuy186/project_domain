@@ -21,11 +21,15 @@ class RedirectController{
     }
 
     public function store(){
-        $rs = $this->model->save();
-        if($rs){
-            echo json_encode(['status' => 'success', 'message' => 'Successfully.']);
-        } else {
-            echo json_encode(['status' => 'error', 'message' => 'Failed to save record.']);
+        if(!empty($_POST['domain_name'])){
+            $rs = $this->model->save();
+            if($rs){
+                echo json_encode(['status' => 'success', 'message' => 'Successfully.']);
+            } else {
+                echo json_encode(['status' => 'error', 'message' => 'Failed to save record.']);
+            }
+        }else{
+            include('views/admin/redirect/add.php');
         }
     }
     

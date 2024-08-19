@@ -15,8 +15,14 @@
                     <form action="index.php?c=redirect&a=store" method="post">
                         <div class="mb-3">
                             <label for="domain_name" class="form-label">Domain Name</label>
-                            <input type="text" class="form-control" id="domain_name" name="domain_name" required>
+                            <input type="text" class="form-control" id="domain_name" name="domain_name">
                         </div>
+
+                        <?php
+                            if($_SERVER['REQUEST_METHOD'] == 'POST' && empty($_POST['domain_name'])){
+                                echo "<div class='text-danger text-left mb-3'>Please enter your domain name</div>";
+                            }
+                        ?>
 
                         <div class="mb-3 form-check">
                             <input type="checkbox" class="form-check-input" id="is_active" name="is_active">

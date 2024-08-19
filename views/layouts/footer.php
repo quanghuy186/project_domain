@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function() {
 <!--end::OverlayScrollbars Configure-->
 <!-- OPTIONAL SCRIPTS -->
 <!-- sortablejs -->
-<script src="public://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"
     integrity="sha256-ipiJrswvAR4VAx/th+6zWsdeYmVae0iJuiR+6OqHJHQ=" crossorigin="anonymous"></script>
 <!-- sortablejs -->
 <script>
@@ -72,7 +72,7 @@ cardHeaders.forEach((cardHeader) => {
     cardHeader.style.cursor = "move";
 });
 </script> <!-- apexcharts -->
-<script src="public://cdn.jsdelivr.net/npm/apexcharts@3.37.1/dist/apexcharts.min.js"
+<script src="https://cdn.jsdelivr.net/npm/apexcharts@3.37.1/dist/apexcharts.min.js"
     integrity="sha256-+vh8GkaU7C9/wbSLIcwq82tQ2wTf44aOHA8HlBMwRI8=" crossorigin="anonymous"></script>
 <!-- ChartJS -->
 <script>
@@ -132,9 +132,9 @@ const sales_chart = new ApexCharts(
 );
 sales_chart.render();
 </script> <!-- jsvectormap -->
-<script src="public://cdn.jsdelivr.net/npm/jsvectormap@1.5.3/dist/js/jsvectormap.min.js"
+<script src="https://cdn.jsdelivr.net/npm/jsvectormap@1.5.3/dist/js/jsvectormap.min.js"
     integrity="sha256-/t1nN2956BT869E6H4V1dnt0X5pAQHPytli+1nTZm2Y=" crossorigin="anonymous"></script>
-<script src="public://cdn.jsdelivr.net/npm/jsvectormap@1.5.3/dist/maps/world.js"
+<script src="https://cdn.jsdelivr.net/npm/jsvectormap@1.5.3/dist/maps/world.js"
     integrity="sha256-XPpPaZlU8S/HWf7FZLAncLg2SAkP8ScUTII89x9D3lY=" crossorigin="anonymous"></script>
 <!-- jsvectormap -->
 <script>

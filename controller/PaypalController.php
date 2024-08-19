@@ -15,7 +15,6 @@ class PaypalController{
         include('views/admin/paypal/index.php');
     }
 
-
     public function add() {
         $paypalGroups = $this->paypalGroup->all();
         include('views/admin/paypal/add.php');
@@ -23,18 +22,17 @@ class PaypalController{
     }
 
     public function store(){
-        // Validate the data before saving (if applicable)
-        // Example: $data = $this->validateInput();
-        $rs = $this->model->save();
-        if($rs){
-           
-        } else {
-            echo json_encode(['status' => 'error', 'message' => 'Failed to save record.']);
-        }
+            $rs = $this->model->save();
+            if($rs){
+               
+            } else {
+                echo json_encode(['status' => 'error', 'message' => 'Failed to save record.']);
+            }
+       
     }
     
     public function update(){
-        $id = $_POST['id'];
+        $id = $_GET['id'];
         $rs = $this->model->upgrade($id);
         if($rs){
             echo json_encode(['status' => 'success', 'message' => 'Record saved successfully.']);
@@ -51,8 +49,8 @@ class PaypalController{
         // lay ra paypal_group_id
         $paypalGroups = $this->paypalGroup->all();
         $currentPaypalGroupId = $this->model->getId($id);
-        $domain = $this->model->find($id);
-        if ($domain === false) {
+        $paypal = $this->model->find($id);
+        if ($paypal === false) {
             die("User not found.");
         }
         include('views/admin/paypal/edit.php');

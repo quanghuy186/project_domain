@@ -27,14 +27,7 @@ class Domain{
         $serverKey = $_POST['serve_key'];
         $isActive = isset($_POST['is_active']) ? 1 : 0;
 
-        // if((empty($domain_name))){
-        //     if (isset($_SESSION['error'])) {
-        //         $error = $_SESSION['error'];
-        //         unset($_SESSION['error']); 
-        //     }
-            
-        // }else{
-            $stm = $this->conn->prepare("INSERT INTO stores (domain_name, public_key, serve_key, is_active) VALUES (:domain_name, :public_key, :serve_key, :is_active)");
+        $stm = $this->conn->prepare("INSERT INTO stores (domain_name, public_key, serve_key, is_active) VALUES (:domain_name, :public_key, :serve_key, :is_active)");
         $stm->bindParam(':domain_name', $domain_name);
         $stm->bindParam(':public_key', $publicKey);
         $stm->bindParam(':serve_key', $serverKey);
@@ -46,29 +39,6 @@ class Domain{
         // }
         
     }
-
-    // public function upgrade($id){
-    //     $domain_name = $_POST['domain_name'];
-    //     $publicKey = $_POST['public_key'];
-    //     $serveKey = $_POST['serve_key'];
-    //     $id = $_POST['id'];
-    //     $isActive = $_POST['is_active'];
-    
-    //     $stm = $this->conn->prepare("UPDATE stores SET domain_name = :domain_name, public_key = :public_key, serve_key = :serve_key, is_active = :is_active WHERE id = :id");
-        
-    //     $stm->bindParam(':id', $id);
-    //     $stm->bindParam(':domain_name', $domain_name);
-    //     $stm->bindParam(':public_key', $publicKey);
-    //     $stm->bindParam(':serve_key', $serveKey);
-    //     $stm->bindParam(':is_active', $isActive);
-        
-    //     if ($stm->execute()) {
-    //         echo json_encode(['status' => 'success']);
-    //     } else {
-    //         echo json_encode(['status' => 'failed']);
-    //     }
-    // }
-    
 
     public function upgrade($id){
             $domain_name = $_POST['domain_name'];

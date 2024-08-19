@@ -20,17 +20,24 @@
                         <div class="mb-3">
                             <label for="domain_name" class="form-label">Domain Name</label>
                             <input type="text" class="form-control" id="domain_name" name="domain_name"
-                                value="<?php echo $domain['domain_name']; ?>" required>
+                                value="<?php echo $domain['domain_name']; ?>">
                         </div>
+
+                        <?php
+                             if($_SERVER['REQUEST_METHOD'] == 'POST' && empty($_POST['domain_name'])){
+                                 echo "<div class='text-danger text-left mb-3'>Please enter your domain name</div>";
+                             }
+                         ?>
+
                         <div class="mb-3">
                             <label for="public_key" class="form-label">Public Key</label>
                             <input type="text" class="form-control" id="public_key" name="public_key"
-                                value="<?php echo $domain['public_key']; ?>" required>
+                                value="<?php echo $domain['public_key']; ?>" readonly>
                         </div>
                         <div class="mb-3">
                             <label for="serve_key" class="form-label">Serve Key</label>
                             <input type="text" class="form-control" id="serve_key" name="serve_key"
-                                value="<?php echo $domain['serve_key']; ?>" required>
+                                value="<?php echo $domain['serve_key']; ?>" readonly>
                         </div>
 
                         <div class="form-check mb-3">

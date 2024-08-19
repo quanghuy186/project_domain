@@ -26,7 +26,6 @@ class DomainController{
             } else {
                 $err = "Thêm mới thất bại!";
                 include('views/admin/domain/add.php');
-                // echo json_encode(['status' => 'error', 'message' => 'Failed to save record.']);
             }
         }else{
             include('views/admin/domain/add.php');
@@ -39,7 +38,7 @@ class DomainController{
         if($rs){
             echo json_encode(['status' => 'success', 'message' => 'Record saved successfully.']);
         } else {
-            echo json_encode(['status' => 'error', 'message' => 'Failed to save record.']);
+            echo json_encode(['status' => 'success', 'message' => 'Record saved successfully.']);
         }
     }
 

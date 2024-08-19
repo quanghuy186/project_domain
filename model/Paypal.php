@@ -42,13 +42,17 @@
         
         public function upgrade($id){
                 $paypal_email = $_POST['paypal_email'];
+                $paypal_group_id = $_POST['paypal_group_id'];
                 $isActive = isset($_POST['is_active']) ? 1 : 0;
-                $isDied = isset($_POST['is_died']) ? 1 : 0;
-                $stm = $this->conn->prepare("UPDATE paypal_accounts SET paypal_email = :paypal_email, is_active = :is_active, is_died = :is_died WHERE id = :id");
+                $is_died = isset($_POST['is_died']) ? 1 : 0;
+                $is_sandbox = isset($_POST['is_sandbox']) ? 1 : 0;
+                $stm = $this->conn->prepare("UPDATE paypal_accounts SET paypal_email = :paypal_email, paypal_group_id = :paypal_group_id, is_active = :is_active, is_died = :is_died, is_sandbox = :is_sandbox WHERE id = :id");
                 $stm->bindParam(':id', $id);
+                $stm->bindParam(':paypal_group_id', $paypal_group_id);
                 $stm->bindParam(':paypal_email', $paypal_email);
                 $stm->bindParam(':is_active', $isActive);
-                $stm->bindParam(':is_died', $isDied);
+                $stm->bindParam(':is_died', $is_died);
+                $stm->bindParam(':is_sandbox', $is_sandbox);
                 
                 if ($stm->execute()) {
                     header("Location: index.php?c=paypal");

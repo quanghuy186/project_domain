@@ -89,14 +89,16 @@ class AccountController{
     }
 
     public function process_pass(){
-        $rs = $this->model->changePassword();
-        if($rs){
-            header("Location: ?c=home");
-        } 
-        // else {
-        //     $error = "Invalid username or password";
-        //     include('views/login.php'); 
-        // }
+        if(!empty($_POST['old_password'])){
+            $rs = $this->model->changePassword();
+            if($rs){
+                header("Location: ?c=home");
+            }else{
+                include('views/changepassword.php');
+            }
+        }else{
+            include('views/changepassword.php');
+        }
     }
 
 }

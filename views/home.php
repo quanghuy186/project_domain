@@ -29,7 +29,7 @@
 
     <div class="app-content">
         <a href="index.php?c=domain&a=add">
-            <div class="btn btn-success">
+            <div class="my-3 btn btn-success">
                 <span class="">Add Domain</span>
             </div>
         </a>

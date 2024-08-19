@@ -13,27 +13,34 @@
                 <div class="container mt-5">
                     <h2>Add paypal Information</h2>
                     <form action="index.php?c=paypal&a=store" method="post">
-                        <div class="mb-3">
+                        <div class="mt-3">
                             <label for="paypal_email" class="form-label">Paypal Email</label>
-                            <input type="text" class="form-control" id="paypal_email" name="paypal_email" required>
+                            <input type="text" class="form-control" id="paypal_email" name="paypal_email" require>
                         </div>
 
-                        <div class="mb-3 form-check">
+                        <?php
+                            if($_SERVER['REQUEST_METHOD'] == 'POST' && empty($_POST['paypal_email'])){
+                                echo "<div class='text-danger mb-3 text-left'>Please enter your paypal email</div>";
+                            }
+                        ?>
+
+                        <div class="mt-3 form-check">
                             <input type="checkbox" class="form-check-input" id="is_active" name="is_active">
                             <label class="form-check-label" for="is_active">Is Active</label>
                         </div>
 
-                        <div class="mb-3 form-check">
+                        <div class="mt-3 form-check">
                             <input type="checkbox" class="form-check-input" id="is_died" name="is_died">
                             <label class="form-check-label" for="is_died">Is Died</label>
                         </div>
 
-                        <div class="mb-3 form-check">
+                        <div class="mt-3 form-check">
                             <input type="checkbox" class="form-check-input" id="is_sandbox" name="is_sandbox">
                             <label class="form-check-label" for="is_sandbox">Is Sandbox</label>
                         </div>
 
-                        <select class="form-select w-25" aria-label="Default select example" name="paypal_group_id">
+                        <select class="form-select w-25 mt-3" aria-label="Default select example"
+                            name="paypal_group_id">
                             <?php
                                 foreach($paypalGroups as $group){
                                     $selected = ($group['id'] == $selectedGroupId) ? 'selected' : '';

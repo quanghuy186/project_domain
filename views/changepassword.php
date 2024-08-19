@@ -21,18 +21,36 @@
                 <form action="index.php?c=account&a=process_pass" method="POST">
                     <div class="mb-3">
                         <label for="old_password" class="form-label">Old Password</label>
-                        <input type="password" id="old_password" name="old_password" class="form-control" required>
+                        <input type="password" id="old_password" name="old_password" class="form-control">
                     </div>
+
+                    <?php
+                        if($_SERVER['REQUEST_METHOD'] == 'POST' && empty($_POST['old_password'])){
+                                echo "<div class='text-danger text-left mb-3'>Please enter your password</div>";
+                            }
+                        ?>
 
                     <div class="mb-3">
                         <label for="new_password" class="form-label">New Password</label>
-                        <input type="password" id="new_password" name="new_password" class="form-control" required>
+                        <input type="password" id="new_password" name="new_password" class="form-control">
                     </div>
+
+                    <?php
+                        if($_SERVER['REQUEST_METHOD'] == 'POST' && empty($_POST['new_password'])){
+                                echo "<div class='text-danger text-left mb-3'>Please enter your new password</div>";
+                            }
+                        ?>
 
                     <div class="mb-3">
                         <label for="cpassword" class="form-label">Confirm Password</label>
-                        <input type="password" id="cpassword" name="cpassword" class="form-control" required>
+                        <input type="password" id="cpassword" name="cpassword" class="form-control">
                     </div>
+
+                    <?php
+                        if($_SERVER['REQUEST_METHOD'] == 'POST' && empty($_POST['cpassword'])){
+                                echo "<div class='text-danger text-left mb-3'>Please enter your confirm password</div>";
+                            }
+                        ?>
 
                     <button type="submit" class="btn btn-primary w-100 mb-3">Change Password</button>
 

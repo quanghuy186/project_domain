@@ -12,11 +12,11 @@
             <div class="card-body">
                 <div class="container mt-5">
                     <h2>Edit paypal Information</h2>
-                    <form action="index.php?c=paypal&a=store" method="post">
+                    <form action="index.php?c=paypal&a=update&id=<?php echo $paypal['id']; ?>" method="post">
                         <div class="mb-3">
                             <label for="paypal_email" class="form-label">Paypal email</label>
                             <input type="text" class="form-control" id="paypal_email" name="paypal_email"
-                                value="<?php echo $domain['paypal_email']; ?>" required>
+                                value="<?php echo $paypal['paypal_email']; ?>" required>
                         </div>
                         <select class="form-select w-25 my-3" aria-label="Default select example"
                             name="paypal_group_id">
@@ -24,7 +24,8 @@
                                 foreach($paypalGroups as $group){
                                     $selected = ($group['id'] == $currentPaypalGroupId['id']) ? 'selected' : '';
                             ?>
-                            <option class="paypal_group_id" value="<?php echo $group['id']?>" <?php echo $selected; ?>>
+                            <option class="paypal_group_id" name="paypal_group_id" value="<?php echo $group['id']?>"
+                                <?php echo $selected; ?>>
                                 <?php echo htmlspecialchars($group['group_name']); ?>
                             </option>
                             <?php
@@ -32,25 +33,23 @@
                           ?>
                         </select>
 
-
                         <div class="form-check mb-3">
                             <input type="checkbox" id="is_active" name="is_active" class="form-check-input" value="1"
-                                <?php echo $domain['is_active'] ? 'checked' : ''; ?>>
+                                <?php echo $paypal['is_active'] ? 'checked' : ''; ?>>
                             <label for="is_active" class="form-check-label">Is Active</label>
                         </div>
 
                         <div class="form-check mb-3">
-                            <input type="checkbox" id="is_died" name="is_active" class="form-check-input" value="1"
-                                <?php echo $domain['is_died'] ? 'checked' : ''; ?>>
+                            <input type="checkbox" id="is_died" name="is_died" class="form-check-input" value="1"
+                                <?php echo $paypal['is_died'] ? 'checked' : ''; ?>>
                             <label for="is_died" class="form-check-label">Is Died</label>
                         </div>
 
                         <div class="form-check mb-3">
                             <input type="checkbox" id="is_sandbox" name="is_sandbox" class="form-check-input" value="1"
-                                <?php echo $domain['is_sandbox'] ? 'checked' : ''; ?>>
+                                <?php echo $paypal['is_sandbox'] ? 'checked' : ''; ?>>
                             <label for="is_sandbox" class="form-check-label">Is Sandbox</label>
                         </div>
-
 
                         <div class="d-flex justify-content-between align-item-center">
                             <button type="submit" class="btn btn-primary px-5 h-50">Submit</button>
